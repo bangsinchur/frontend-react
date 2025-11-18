@@ -1,4 +1,4 @@
-import { useRef, useReducer } from "react";
+import { useRef, useReducer, useCallback } from "react";
 import "./App.css";
 import Editor from "./components/Editor";
 import Header from "./components/Header";
@@ -55,21 +55,20 @@ function App() {
     });
   };
 
-  const onUpdate = (targetId) => {
+  const onUpdate = useCallback((targetId) => {
     dispatch({
       type: "UPDATE",
       targetId,
     });
-  };
+  }, []);
 
-  const onDelete = (targetId) => {
+  const onDelete = useCallback((targetId) => {
     dispatch({
       type: "DELETE",
       targetId,
     });
-
     //인수: todos 배열에서 targetId와 일치하는 id를 갖는 요소막 삭제한 새로운 배열
-  };
+  }, []);
 
   return (
     <div className="App">

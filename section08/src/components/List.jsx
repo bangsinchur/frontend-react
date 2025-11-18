@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import "./List.css";
 import TodoItem from "./TodoItem";
 
@@ -13,16 +13,34 @@ const List = ({ todos, onUpdate, onDelete }) => {
     if (search === "") {
       return todos;
     }
-    return todos.filter((todo) => {
-      todo.content.toLowerCase().includes(search.toLowerCase());
-    });
+
+    return todos.filter((todo) =>
+      todo.content.toLowerCase().includes(search.toLowerCase())
+    );
   };
 
   const filteredTodos = getFilteredDate(); // 함수가 리렌더링 될때마다 호출
 
+  const { totalCount, doneCount, notDoneCount } = useMemo(() => {
+    const totalCount = todos.length;
+    const doneCount = todos.filter((todo) => todo.isDone).length;
+    const notDoneCount = totalCount - doneCount;
+
+    return {
+      totalCount,
+      doneCount,
+      notDoneCount,
+    };
+  }, [todos]);
+
   return (
     <div className="List">
       <h4>Todo List 🌱</h4>
+      <div>
+        <p>total: {totalCount}</p>
+        <p>doneCount: {doneCount}</p>
+        <p>notDoneCount: {notDoneCount}</p>
+      </div>
       <input
         value={search}
         onChange={onChangeSearch}
