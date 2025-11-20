@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import "./Diary.css";
 
 const Diary = () => {
   const params = useParams();
