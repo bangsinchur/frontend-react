@@ -1,6 +1,6 @@
 import "./App.css";
 import { createContext, useEffect, useReducer, useRef, useState } from "react";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import New from "./pages/New";
 import Diary from "./pages/Diary";
